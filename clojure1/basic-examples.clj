@@ -1,5 +1,3 @@
-(class 50n)
-
 (defn valor-descontado
     "Retornar o valor com desconto de 10%"
     [valor-bruto]
@@ -30,3 +28,9 @@
             (println "Calculando desconto de " desconto)
             (- valor-bruto desconto))
         valor-bruto))
+
+(class 50)
+(class "50")
+(class 50.99)
+
+(if nil (println "true") (println "false"))
