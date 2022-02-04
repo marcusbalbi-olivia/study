@@ -50,4 +50,32 @@
        (reduce +)))
 
 (println (total-do-pedido3 pedido))
-;(println (map preco-total-produto (vals pedido)))
+
+
+
+
+(def pedido {:mochila { :quantidade 2, :preco 80 }
+             :camiseta { :quantidade 3, :preco 25 }
+             :chaveiro { :quantidade 1 }})
+
+(defn gratuito?
+  [[_ produto]]
+  (<= (:preco produto 0) 0))
+
+(println "Itens Gratuitos" (filter gratuito? pedido))
+
+
+
+(defn gratuito2?
+  [produto]
+  (<= (:preco produto 0) 0))
+
+(defn pago?
+  [produto]
+  (not (gratuito2? produto)))
+
+(println "Itens Gratuitos2" (filter #(gratuito2? (second %)) pedido))
+(println "Itens Pagos" (filter #(pago? (second %)) pedido))
+
+(def pago2? (comp not gratuito2?))
+(println "Itens Pagos2" (filter #(pago2? (second %)) pedido))
