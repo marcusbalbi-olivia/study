@@ -45,13 +45,24 @@
 ;(meu-mapa println ["Joao", false, "Batista"])
 
 
+;(defn  meu-mapa
+;    [funcao sequencia]
+;    (let [primeiro (first sequencia)]
+;      (if (not (nil? primeiro))
+;        (do
+;          (funcao primeiro)
+;          (meu-mapa funcao (rest sequencia))))))
+
+
+;(meu-mapa println ["Joao", false, "Batista"])
+
+
 (defn  meu-mapa
-    [funcao sequencia]
-    (let [primeiro (first sequencia)]
-      (if (not (nil? primeiro))
-        (do
-          (funcao primeiro)
-          (meu-mapa funcao (rest sequencia))))))
+  [funcao sequencia]
+  (let [primeiro (first sequencia)]
+    (if (not (nil? primeiro))
+      (do
+        (funcao primeiro)
+        (recur funcao (rest sequencia))))))
 
-
-(meu-mapa println ["Joao", false, "Batista"])
+(meu-mapa println (range 1 5000))
