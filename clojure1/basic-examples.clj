@@ -29,6 +29,7 @@
             (- valor-bruto desconto))
         valor-bruto))
 
+
 (class 50)
 (class "50")
 (class 50.99)
