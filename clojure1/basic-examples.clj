@@ -18,7 +18,6 @@
         (println "O número " n1 "é maior do que " n2)
         (println "O número " n1 "não é maior do que " n2)))
 
-
 (defn valor-descontado
     "Retornar o valor com desconto de 10%"
     [valor-bruto]
