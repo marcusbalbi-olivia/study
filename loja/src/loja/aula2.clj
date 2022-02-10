@@ -28,3 +28,13 @@
 
 (println (conta 0 ["Maria" "Pedro" "Augusto" "Fabiana"]))
 (println (conta ["Maria" "Pedro" "Augusto" "Fabiana"]))
+
+
+(defn conta-loop
+  [elementos]
+  (loop [total-ate-agora 0 elementos-restantes elementos]
+    (if (seq elementos-restantes)
+      (recur (inc total-ate-agora) (next elementos-restantes))
+      total-ate-agora)))
+
+(println (conta-loop ["Maria" "Pedro" "Augusto" "Fabiana"]))
