@@ -38,7 +38,10 @@
   (* (get detalhes :quantidade 0) (get detalhes :preco-unitario 0 )))
 
 (defn total-do-pedido [pedido]
-  (reduce + (map total-do-item pedido)))
+  (->> pedido
+       (map total-do-item)
+       (reduce +)
+       ))
 
 (defn total-dos-pedidos
   [pedidos]
