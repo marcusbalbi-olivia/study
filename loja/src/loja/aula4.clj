@@ -37,5 +37,4 @@
         (println "Top 2" (top-2 resumo))
         (println "Maior que 500" (filter #(> (:preco-total %) 500) resumo))
         (println "Alguem gastou mais que 500" (some #(> (:preco-total %) 500) resumo))
-        (println "Maior que 500 com not empty filter" (not (empty? (filter #(> (:preco-total %) 500) resumo))))
-        )
+        (println "Maior que 500 com not empty filter" (not (empty? (filter #(> (:preco-total %) 500) resumo)))))
