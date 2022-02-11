@@ -38,8 +38,8 @@
 (def pedido5 {
               :usuario 15
               :itens {
-                      :mochila { :id :mochila :quantidade 1, :preco-unitario 80 }
-                      :camiseta { :id :camiseta :quantidade 1, :preco-unitario 40 }
+                      :mochila { :id :mochila :quantidade 10, :preco-unitario 80 }
+                      :camiseta { :id :camiseta :quantidade 15, :preco-unitario 40 }
                       }
               })
 
