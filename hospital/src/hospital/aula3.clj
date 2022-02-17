@@ -56,4 +56,31 @@
   )
 
 
-(teste-atomao)
+;(teste-atomao)
+
+
+; swap! faz retries para tentar inserir no atamo
+(defn chega-em-malvado! [hospital departamento pessoa]
+  (swap! hospital h.logic/chega-em-pausado-logando departamento pessoa)
+  (println "apos inserir" pessoa))
+
+(defn chega-em-normal! [hospital departamento pessoa]
+  (swap! hospital h.logic/chega-em departamento pessoa)
+  (println "apos inserir" pessoa))
+
+(defn simula-um-dia-em-paralelo [chega-em departamento]
+  ; Simula o problema de variavel compartilhada em um ambiente multithread
+  (let [hospital (atom (h.model/novo-hospital))]
+    (.start (Thread. (fn [] (chega-em hospital departamento "111"))))
+    (.start (Thread. (fn [] (chega-em hospital departamento "222"))))
+    (.start (Thread. (fn [] (chega-em hospital departamento "333"))))
+    (.start (Thread. (fn [] (chega-em hospital departamento "444"))))
+    (.start (Thread. (fn [] (chega-em hospital departamento "555"))))
+    (.start (Thread. (fn [] (chega-em hospital departamento "666"))))
+    (.start (Thread. (fn []
+                       (Thread/sleep 8000)
+                       (pprint hospital)
+                       )))))
+
+;(simula-um-dia-em-paralelo chega-em-malvado! :espera)
+(simula-um-dia-em-paralelo chega-em-normal! :laboratorio1)
