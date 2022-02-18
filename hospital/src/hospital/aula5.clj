@@ -19,6 +19,9 @@
     (chega-em! hospital "Carlos")
     (chega-em! hospital "Julia")
     (transfere! hospital :espera :laboratorio1)
+    (transfere! hospital :espera :laboratorio2)
+    (transfere! hospital :espera :laboratorio2)
+    (transfere! hospital :laboratorio2 :laboratorio3)
     (pprint hospital)
     ))
 
