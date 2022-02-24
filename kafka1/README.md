@@ -7,3 +7,7 @@ bin/kafka-console-producer.sh --broker-list localhost:9092 --topic LOJA_NOVOPEDI
 bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic LOJA_NOVOPEDIDO
 
 bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic LOJA_NOVOPEDIDO --from-beginning
+
+bin/kafka-topics.sh --bootstrap-server localhost:9092 --alter --topic ECOMMERCE_NEW_ORDER --partitions 3
+
+bin/kafka-consumer-groups.sh --all-groups --bootstrap-server localhost:9092 --describe

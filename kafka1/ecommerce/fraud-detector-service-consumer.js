@@ -11,10 +11,10 @@ const run = async () => {
     consumer.subscribe({ topic: "ECOMMERCE_NEW_ORDER" });
     await consumer.run({
         eachMessage: (payload) => {
-            console.log('===================================================================')
-            console.log(`Processando mensagem: ${payload.message.key}, procurando por fraude`);
+            console.log('===========================')
+            console.log(`Lendo da partiçaão: ${payload.partition}`)
+            console.log(`procurando fraude no pedido: ${payload.message.key}`);
             console.log(`Pedido Processado!`)
-            console.log('===================================================================')
         }
     })
 }

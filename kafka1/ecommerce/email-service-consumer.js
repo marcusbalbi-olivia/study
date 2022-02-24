@@ -11,10 +11,9 @@ const run = async () => {
     consumer.subscribe({ topic: "ECOMMERCE_SEND_EMAIL" });
     await consumer.run({
         eachMessage: (payload) => {
-            console.log('===================================================================')
+            console.log('=========================================')
             console.log(`enviando email: ${payload.message.value}`);
             console.log(`Email Enviado!`)
-            console.log('=========================================');
         }
     })
 }
