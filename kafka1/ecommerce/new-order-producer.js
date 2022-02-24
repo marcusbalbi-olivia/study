@@ -26,6 +26,23 @@ const run = async () => {
     }).catch((err) =>{
         console.log('Failed sending message: ' + err);
     });
+
+    const email = 'Welcome we are processing your order!'
+    await producer.send({
+        topic: 'ECOMMERCE_SEND_EMAIL',
+        messages: [
+            { value: email },
+        ],
+    }).then((result) =>{
+        console.log(`Message sent! 
+        topic: ${topic}
+        partition: ${result[0].partition}
+        startOffeset: ${result[0].logStartOffset}
+        Baseoffset: ${result[0].baseOffset}
+        time: ${result[0].timestamp}`)
+    }).catch((err) =>{
+        console.log('Failed sending message: ' + err);
+    });
 }
 
 run();

@@ -4,17 +4,17 @@ const kafka = new Kafka({
     clientId: 'my-app',
     brokers: ['localhost:9092']
 })
-const consumer = kafka.consumer({ groupId: 'FRAUD_DETECTOR' })
+const consumer = kafka.consumer({ groupId: 'EMAIL_SERVICE' })
 
 const run = async () => {
     await consumer.connect();
-    consumer.subscribe({ topic: "ECOMMERCE_NEW_ORDER" });
+    consumer.subscribe({ topic: "ECOMMERCE_SEND_EMAIL" });
     await consumer.run({
         eachMessage: (payload) => {
             console.log('===================================================================')
-            console.log(`Processando mensagem: ${payload.message.key}, procurando por fraude`);
-            console.log(`Pedido Processado!`)
-            console.log('===================================================================')
+            console.log(`enviando email: ${payload.message.value}`);
+            console.log(`Email Enviado!`)
+            console.log('=========================================');
         }
     })
 }
