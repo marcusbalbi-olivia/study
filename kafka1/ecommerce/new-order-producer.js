@@ -11,12 +11,16 @@ const topic = 'ECOMMERCE_NEW_ORDER'
 const run = async () => {
   // Producing
     await producer.connect()
-    const value = JSON.stringify({ user_id: crypto.randomBytes(10).toString('hex'), items: []  })
     for(let i = 0; i < 10; i++) {
+        const order = { 
+            user_id: crypto.randomBytes(10).toString('hex'),
+            order_id: 'Order-' + crypto.randomBytes(10).toString('hex'),
+            amount: Math.random() * 3500 + 1
+        }
         await producer.send({
             topic,
             messages: [
-                { value, key: 'Order-' + crypto.randomBytes(10).toString('hex')},
+                { value: JSON.stringify(order), key: order.order_id },
             ],
         }).then((result) =>{
             console.log(`Message sent! 
