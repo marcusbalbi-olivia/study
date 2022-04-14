@@ -42,3 +42,24 @@
   (println (deve-assinar-pre-autorizacao? particular :raio-x 500))
   (println (deve-assinar-pre-autorizacao? plano :raio-x 500))
   (println (deve-assinar-pre-autorizacao? plano :coleta-de-sangue 500)))
+
+
+(defprotocol Dateable
+  (to-ms [this]))
+
+(extend-type java.lang.Number Dateable
+             (to-ms [this]
+               (identity this)))
+(to-ms 10)
+
+(extend-type java.util.Date Dateable
+             (to-ms [this]
+               (.getTime this)))
+
+(to-ms (java.util.Date.))
+
+(extend-type java.util.Calendar Dateable
+             (to-ms [this]
+               (to-ms (.getTime this))))
+
+(to-ms (java.util.GregorianCalendar.))
