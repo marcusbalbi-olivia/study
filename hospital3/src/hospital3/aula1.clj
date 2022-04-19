@@ -1,5 +1,8 @@
 (ns hospital3.aula1 
-  (:require [clojure.pprint :as pprint]))
+  (:require [clojure.pprint :as pprint]
+            [schema.core :as s]))
+
+
 
 (defn adiciona-paciente [pacientes paciente]
   (if-let [id (:id paciente)]
@@ -29,7 +32,34 @@
     (pprint/pprint visitas)
     (imprime-relatorio-de-paciente visitas guilherme)
     ))
+(testa-usa-de-pacientes)
 
+
+(s/validate Long 15) ;; devolve o proprio valor quando valido
+(s/validate Long "Marcus")
+(s/validate Long [1 2 3 4 5])
+
+
+;; declarativo nao valida
+(s/defn teste-simples [x :- Long]
+        (println x))
+(teste-simples 12)
+(teste-simples "Teste")
+
+
+;; define explicatamente que deve validar na forma declarativa
+(s/set-fn-validation! true)
+(s/defn teste-simples [x :- Long]
+  (println x))
+(teste-simples 12)
+(teste-simples "Teste")
+
+(s/defn imprime-relatorio-de-paciente [visitas paciente :- Long]
+  (println "Visitas do paciente " paciente "são:" (get visitas paciente)))
 
 (testa-usa-de-pacientes)
 
+(s/defn novo-paciente [id :- Long nome :- s/Str]
+        {:id id :nome nome})
+
+(novo-paciente 15 "Balbi") 
