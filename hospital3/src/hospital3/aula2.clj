@@ -34,3 +34,14 @@
   {:id id :nome nome })
 
 (novo-paciente 15 "Balbi")
+
+
+(defn estritamente-positivo?  [x]
+  (> x 0))
+
+(def EstritamentePositivo (s/pred estritamente-positivo? 'estritamente-positivo))
+
+(s/validate EstritamentePositivo 20)
+(s/validate EstritamentePositivo -20)
+(s/validate EstritamentePositivo 0)
+(s/validate EstritamentePositivo "Not a number")
