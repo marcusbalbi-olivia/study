@@ -5,17 +5,21 @@
 
 (def PosInt (s/pred pos-int? 'inteiro-positivo))
 
+(def Plano [s/Keyword])
+
 (def Paciente
   {:id PosInt
-   :nome s/Str})
+   :nome s/Str
+   :plano Plano})
 
 (s/defn novo-paciente :- Paciente
         [id :- PosInt
-         nome :- s/Str]
-        {:id id :nome nome})
+         nome :- s/Str
+         plano :- Plano]
+        {:id id :nome nome :plano plano})
 
 
-(novo-paciente 1 "Marcus Balbi")
+(novo-paciente 1 "Marcus Balbi" nil)
 ;(novo-paciente -2 "Joao Silva")
 
 (defn maior-ou-igual-zero?
@@ -36,7 +40,7 @@
         { :paciente paciente :valor valor :procedimento procedimento })
 
 
-(def balbi (novo-paciente 1 "Balbi"))
+(def balbi (novo-paciente 1 "Balbi" nil))
 
 (novo-pedido balbi 25.90 :raio-x)
 (novo-pedido balbi 0 :coleta-de-sangue)
@@ -45,5 +49,12 @@
 ;(novo-pedido balbi 25.90 "Raio-X")
 ;(novo-pedido balbi -5 :coleta-de-sangue)
 
+(def Numeros [s/Num])
+(s/validate Numeros [2 4 6 8])
+(s/validate Numeros [0])
+(s/validate Numeros [])
+(s/validate Numeros [nil])
+(s/validate Numeros nil)
 
+(s/validate Plano [:raio-x])
 
