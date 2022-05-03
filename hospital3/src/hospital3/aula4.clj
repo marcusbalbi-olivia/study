@@ -49,4 +49,6 @@
 
 
 
+(def Visitas {PosInt [s/Str]})
+
 
