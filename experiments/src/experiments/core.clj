@@ -37,10 +37,27 @@
     (< hour 20)  "Good Evening"
     (>= hour 21) "Good Night"))
 
-(greetings 10)
-(greetings 13)
-(greetings 18)
-(greetings 23)
+(greetings-improved 10)
+(greetings-improved 13)
+(greetings-improved 18)
+(greetings-improved 23)
+
+
+(defn fetch-name []
+  "Reads and returns the contents of a hard coded text file"
+  (slurp "name.txt"))
+
+(defn hello-text []
+  "Says Hello, Name"
+  (println "Hello" (fetch-name)))
+
+(hello-text)
+
+(defn hello-pure-name
+  [name]
+  (str "Hello, " name))
+
+(println (hello-pure-name (fetch-name)))
 
 
 
