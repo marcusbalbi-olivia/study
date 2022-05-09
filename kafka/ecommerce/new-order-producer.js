@@ -4,7 +4,7 @@ const crypto  = require('crypto');
 const kafka = new Kafka({
     clientId: 'my-app',
     brokers: ['localhost:9092']
-})
+}); 
 
 const producer = kafka.producer()
 const topic = 'ECOMMERCE_NEW_ORDER'
