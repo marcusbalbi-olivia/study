@@ -5,7 +5,7 @@ const kafka = new Kafka({
     brokers: ['localhost:9092']
 })
 const consumer = kafka.consumer({ groupId: 'FRAUD_DETECTOR' })
-
+const producer = kafka.producer()
 const wait = (ms) => {
     return new Promise((resolve, _) => {
         setTimeout(() => { resolve(true) }, ms);
@@ -18,6 +18,7 @@ const isFraud = (order) => {
 
 const run = async () => {
     await consumer.connect();
+    await producer.connect();
     consumer.subscribe({ topic: "ECOMMERCE_NEW_ORDER" });
     await consumer.run({
         eachMessage: async (payload) => {
@@ -31,8 +32,20 @@ const run = async () => {
             if (isFraud(order)) {
                 // pretend that the fraud happens when the amount is higher than 4500
                 console.log(`Pedido é uma Fraude!`, order);
+                producer.send({
+                    topic: 'ECOMMERCE_ORDER_REJECTED',
+                    messages: [
+                        { value: JSON.stringify(order), key: order.order_id },
+                    ],
+                })
             } else {
                 console.log(`Pedido Aprovado!`, order);
+                producer.send({
+                    topic: 'ECOMMERCE_ORDER_APPROVED',
+                    messages: [
+                        { value: JSON.stringify(order), key: order.order_id },
+                    ],
+                })
             }
 
         }

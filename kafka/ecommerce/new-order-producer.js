@@ -15,7 +15,7 @@ const run = async () => {
         const order = { 
             user_id: crypto.randomBytes(10).toString('hex'),
             order_id: 'Order-' + crypto.randomBytes(10).toString('hex'),
-            amount: Math.random() * 3500 + 1
+            amount: Math.random() * 5000 + 1
         }
         await producer.send({
             topic,
