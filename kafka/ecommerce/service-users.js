@@ -1,5 +1,6 @@
 const { Kafka } = require('kafkajs')
 const fs = require('fs');
+const crypto = require('crypto');
 
 const kafka = new Kafka({
     clientId: 'my-app',
@@ -29,13 +30,17 @@ const checkUserExists = (order) => {
     if (!db.users || !Array.isArray(db.users) || db.users.length === 0) {
         return false;
     }
-    return db.users.includes(order.user_id);
+    return db.users.some(user => user.email === order.user_email);
 }
 
 const saveNewUser = (order) => {
     const db = openDB();
     if (!db.users) { db.users = []; }
-    db.users.push(order.user_id);
+    const user = {
+        email: order.user_email,
+        id: crypto.randomBytes(10).toString('hex')
+    }
+    db.users.push(user);
     saveDB(db);
 }
 
@@ -43,7 +48,7 @@ const checkAndSaveUser = (order) => {
     if (checkUserExists(order)) {
         console.log('User already exists, nothing to do');
     } else {
-        console.log('New user registered: ', order.user_id);
+        console.log('New user registered: ', order.user_email);
         saveNewUser(order);
     }
 }
@@ -55,7 +60,11 @@ const run = async () => {
         eachMessage: (payload) => {
             const order = JSON.parse(payload.message.value);
             console.log('=========================================')
-            console.log(`registrando usuário: ${order.user_id}`);
+            if (!order.user_email) {
+                console.log('Email do Usuáro não enviado no pedido', order)
+                return;
+            }
+            console.log(`registrando usuário: ${order.user_email}`);
             checkAndSaveUser(order);
         }
     })

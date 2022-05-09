@@ -26,8 +26,8 @@ const run = async () => {
             console.log('===========================')
             console.log(`Lendo da partição: ${payload.partition}`)
             console.log(`procurando fraude no pedido: ${payload.message.key}`);
-            console.log(`Analisando o pedido: Usuario: ${order.user_id}, Numero do Pedido: ${order.order_id}, valor: ${order.amount}`)
-            await wait(5000);
+            console.log(`Analisando o pedido: Usuario: ${order.user_email}, Numero do Pedido: ${order.order_id}, valor: ${order.amount}`)
+            await wait(1000);
 
             if (isFraud(order)) {
                 // pretend that the fraud happens when the amount is higher than 4500
@@ -35,7 +35,7 @@ const run = async () => {
                 producer.send({
                     topic: 'ECOMMERCE_ORDER_REJECTED',
                     messages: [
-                        { value: JSON.stringify(order), key: order.order_id },
+                        { value: JSON.stringify(order), key: order.user_email },
                     ],
                 })
             } else {
@@ -43,7 +43,7 @@ const run = async () => {
                 producer.send({
                     topic: 'ECOMMERCE_ORDER_APPROVED',
                     messages: [
-                        { value: JSON.stringify(order), key: order.order_id },
+                        { value: JSON.stringify(order), key: order.user_email },
                     ],
                 })
             }
