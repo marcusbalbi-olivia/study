@@ -9,3 +9,4 @@
 (select-keys settings [:url])
 
 (map key settings)
+(map val settings)
