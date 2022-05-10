@@ -11,8 +11,15 @@ const producer = kafka.producer();
 
 const sendOrderKafka = (order) => {
     const topic = 'ECOMMERCE_NEW_ORDER'
+    /**
+     * acks	Control the number of required acks.
+            -1 = all insync replicas must acknowledge (default)
+            0 = no acknowledgments
+            1 = only waits for the leader to acknowledge	-1 all insync replicas must acknowledge
+     */
     return producer.send({
         topic,
+        acks: 1,
         messages: [
             { value: JSON.stringify(order), key: order.user_email },
         ],
