@@ -71,7 +71,7 @@ app.post('/new-order', async (req, res) => {
     .catch((err) => {
         console.log('Failed sending message: ' + err);
     });
-    res.send({ status: true });
+    res.send({ status: true, order });
 })
 
 app.listen(port, async () => {
