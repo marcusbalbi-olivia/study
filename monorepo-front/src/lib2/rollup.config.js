@@ -3,12 +3,11 @@ import commonjs from "@rollup/plugin-commonjs";
 import typescript from "@rollup/plugin-typescript";
 import postcss from "rollup-plugin-postcss";
 import dts from "rollup-plugin-dts";
-
+import path from 'path'
 const packageJson = require("./package.json");
-
 export default [
   {
-    input: "src/index.ts",
+    input: "./src/index.ts",
     output: [
       {
         file: packageJson.main,
@@ -24,7 +23,7 @@ export default [
     plugins: [
       resolve(),
       commonjs(),
-      typescript({ tsconfig: "./tsconfig.json" }),
+      typescript({ tsconfig: "./tsconfig.json",  }),
       postcss(),
     ],
   },

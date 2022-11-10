@@ -1,11 +1,12 @@
 import React from 'react';
 import './App.css';
-import { Button } from "@monorepo/lib2"
+import { Button, Header } from "@monorepo/lib2"
 
 function App() {
   return (
     <div className="App">
-      <Button label='test' />
+      <Header title='BLAUD'></Header>
+      <Button onClick={() => { alert('ok!') }} label='teste' />
     </div>
   );
 }
