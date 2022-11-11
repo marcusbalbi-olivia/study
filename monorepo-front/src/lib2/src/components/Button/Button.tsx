@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Button.scss";
 
 export interface ButtonProps
@@ -10,5 +10,6 @@ export interface ButtonProps
 }
 
 export const Button = (props: ButtonProps) => {
+  const [count, setCount] = useState(0);
   return <button {...props}>{props.label}</button>;
 };
