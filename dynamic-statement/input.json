@@ -1,0 +1,6 @@
+[
+    { "id": 1, "description": "Apple", "amount": 9.99 },
+    { "id": 2, "description": "Apple", "amount": 3500 },
+    { "id": 3, "description": "Prime", "amount": 9.99 },
+    { "id": 3, "description": "aPpleTv", "amount": 7.50 }
+]

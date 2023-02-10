@@ -1,0 +1,12 @@
+[
+    {
+        "name": "appletv",
+        "conditions": [
+            { "field_name": "description", "operator": "contains", "value": "apple" },
+            { "field_name": "amount", "operator": "<=", "value": 10 }
+        ],
+        "results": [
+            { "field_name": "category", "value": "10" }
+        ]
+    }
+]
